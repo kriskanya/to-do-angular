@@ -2,3 +2,13 @@ extends ../shared/template
 
 block content
   h1= title
+  div(ng-controller='todoController')
+    form(name='frm' ng-submit = 'addTodo()')
+      input(type='text' name='newtodo' ng-model='newTodo' required)
+      button(ng-disabled = "frm.$invalid") Go
+
+    button(ng-click="clearCompleted()") Clear completed
+    ul
+      li(ng-repeat = 'todo in todos')
+        input(type='checkbox' ng-model = 'todo.done')
+        span(ng-class = '{"done":todo.done}'){{todo.title}}
